@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to right, #5c91e5, #983fc6);
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Main Container */
+    .command {
+      width: 380px;
+      padding: 30px;
+      border-radius: 25px;
+      background: black;
+      backdrop-filter: blur(30px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      animation: floatBox 3s ease-in-out infinite;
+    }
+
+    /* First Button */
+    .inputBox {
+      flex: 1;
+      height: 60px;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      background: #5c91e5;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+      font-size: 15px;
+      font-weight: bolder;
+    }
+
+    /* Second Button */
+    .inputBox01 {
+      flex: 1;
+      height: 60px;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      background: #983fc6;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+      font-size: 15px;
+      font-weight: bolder;
+    }
+
+    /* Hover Effect */
+    .inputBox:hover,
+    .inputBox01:hover {
+      transform: translateY(-6px) scale(1.05);
+    }
+
+    /* Shine Animation */
+    .inputBox::before,
+    .inputBox01::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-25deg);
+      transition: 0.6s;
+    }
+
+    .inputBox:hover::before,
+    .inputBox01:hover::before {
+      left: 120%;
+    }
+
+    /* Text */
+    .text {
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      animation: glow 2s infinite alternate;
+      cursor: pointer;
+    }
+
+    /* Output Box */
+    .output {
+      width: 100%;
+      padding: 20px;
+      margin-top: 20px;
+
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      letter-spacing: 1px;
+
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+      animation: glowBox 2s infinite alternate;
+    }
+
+    /* Text Glow Animation */
+    @keyframes glowBox {
+      from {
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      }
+
+      to {
+        box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+      }
+    }
+    /* Floating Animation */
+    @keyframes floatBox {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Glow Animation */
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #38bdf8;
+      }
+      to {
+        text-shadow: 0 0 20px #f97316;
+      }
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+  <body>
+    <section>
+      <div class="command">
+        <button class="inputBox">#5C91E5</button>
+        <button class="inputBox01">#983FC6</button>
+        <p class="text">Copy your code here</p>
+        <div class="output">
+          background: linear-gradient(to right, #5C91E5, #983FC6)
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let btn1 = document.querySelector(".inputBox");
+      let btn2 = document.querySelector(".inputBox01");
+      let output = document.querySelector(".output");
+      let text = document.querySelector(".text");
+
+      const hexCode = () => {
+        let code = "123456789abcdef";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += code[Math.floor(Math.random() * 15)];
+        }
+        return color;
+      };
+
+      const handleClick01 = () => {
+        btn1.innerHTML = hexCode();
+        document.body.style.background = `linear-gradient(to right, ${btn1.innerHTML}, ${btn2.innerHTML})`;
+        output.innerHTML = `Background image : linear-gradient(to right, ${btn1.innerHTML}, ${btn2.innerHTML})`;
+        btn1.style.background = btn1.innerHTML;
+      };
+
+      const handleClick02 = () => {
+        btn2.innerHTML = hexCode();
+        document.body.style.background = `linear-gradient(to right, ${btn1.innerHTML}, ${btn2.innerHTML})`;
+        output.innerHTML = `Background image : linear-gradient(to right, ${btn1.innerHTML}, ${btn2.innerHTML})`;
+        btn2.style.background = btn2.innerHTML;
+      };
+      btn1.addEventListener("click", handleClick01);
+      btn2.addEventListener("click", handleClick02);
+      text.addEventListener("click", () => {
+        navigator.clipboard.writeText(output.innerHTML);
+        text.innerHTML = "Code Copied!";
+        setTimeout(() => {
+          text.innerHTML = "Copy your code here";
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
